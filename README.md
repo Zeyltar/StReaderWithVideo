@@ -1,3 +1,3 @@
 # StReaderWithVideo
 
-If you want the version that has been presented during the demonstration, you might want to go on the demo branch [here](https://github.com/Zeyltar/StReaderWithVideo/tree/demo).
+Si vous voulez la version qui a été présentée lors de la démonstration, vous voudrez peut-être aller sur la branche demo [ici)(https://github.com/Zeyltar/StReaderWithVideo/tree/demo).
