@@ -23,47 +23,28 @@ namespace StReaderWithVideo
         private DateTime startTime;
         private DateTime pauseTime;
         private bool isPaused;
+        private bool isFullScreen;
+
         public MainWindow()
         {
             InitializeComponent();
             St.Visibility = Visibility.Hidden;
+            SetWindowedScreen();
             isPaused = false;
             Video.Source = new Uri(@"..\..\The.Mandalorian.S02E01.mkv", UriKind.Relative);
             Video.Play();
             startTime = DateTime.Now;
-            Console.WriteLine(startTime);
             InitialiseSubtitles(@"..\..\The.Mandalorian.S02E01.srt");
+            
         }
 
-        private void Pause()
-        {
-            isPaused = true;
-            Video.Pause();
-            pauseTime = DateTime.Now;
-        }
-
-        private void Resume()
-        {
-            isPaused = false;
-            Video.Play();
-            startTime += DateTime.Now - pauseTime;
-        }
-
-        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if(isPaused)
-                Resume();
-            else
-                Pause();
-        }
-
-        async void InitialiseSubtitles(string path)
+        private async void InitialiseSubtitles(string path)
         {
             Subtitle.ReadSrtFile(path);
             await ManageSubtitle();
         }
 
-        async Task ManageSubtitle()
+        private async Task ManageSubtitle()
         {
             for (int i = 0; i < Subtitle.List.Count; i++)
             {
@@ -72,7 +53,7 @@ namespace StReaderWithVideo
             }
         }
 
-        async Task DisplaySubtitle(int index)
+        private async Task DisplaySubtitle(int index)
         {
             while (DateTime.Now - startTime < Subtitle.List[index].Start || isPaused)
             {
@@ -80,12 +61,11 @@ namespace StReaderWithVideo
             }
 
             St.FontStyle = (Subtitle.List[index].IsItalic) ? FontStyles.Italic : FontStyles.Normal;
-            
             St.Visibility = Visibility.Visible;
             St.Text = Subtitle.List[index].Text;
         }
 
-        async Task ClearSubtitle(int index)
+        private async Task ClearSubtitle(int index)
         {
             while (DateTime.Now - startTime < Subtitle.List[index].End || isPaused)
             {
@@ -93,6 +73,74 @@ namespace StReaderWithVideo
             }
             St.Visibility = Visibility.Hidden;
             St.Text = "";
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isPaused)
+                ResumeVideo();
+            else
+                PauseVideo();
+        }
+
+        private void PauseVideo()
+        {
+            isPaused = true;
+            Video.Pause();
+            pauseTime = DateTime.Now;
+        }
+
+        private void ResumeVideo()
+        {
+            isPaused = false;
+            Video.Play();
+            startTime += DateTime.Now - pauseTime;
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if(!e.IsRepeat)
+            {
+                switch (e.Key)
+                {
+                    case Key.F:
+                        if (isFullScreen)
+                            SetWindowedScreen();
+                        else
+                            SetFullScreen();
+                        break;
+                    case Key.Escape:
+                        if (isFullScreen)
+                            SetWindowedScreen();
+                        break;
+                    case Key.Space:
+                        if (isPaused)
+                            ResumeVideo();
+                        else
+                            PauseVideo();
+                        break;
+                }
+            }
+        }
+
+        private void SetFullScreen()
+        {
+            isFullScreen = true;
+            Visibility  = Visibility.Collapsed;
+            WindowState = WindowState.Maximized;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            Visibility = Visibility.Visible;
+            Topmost = true;
+        }
+
+        private void SetWindowedScreen()
+        {
+            isFullScreen = false;
+            WindowState = WindowState.Normal;
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            ResizeMode = ResizeMode.CanResize;
+            Topmost = false;
         }
 
     }
