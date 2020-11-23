@@ -8,6 +8,6 @@
 - [x] Fenêtré/Plein écran
 
 ## Raccourcis
-Pause : Clic gauche, Espace  
-Passage plein écran : F  
-Passage fenêtré : F, Échap  
+Pause/reprise : Clic gauche, Espace  
+Plein écran : F  
+Fenêtré : F, Échap  
