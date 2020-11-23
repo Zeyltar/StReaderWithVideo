@@ -16,6 +16,7 @@ namespace StReaderWithVideo
         {
             get { return isItalic_;  }
         }
+
         private TimeSpan start_;
         public TimeSpan Start
         {
@@ -69,7 +70,6 @@ namespace StReaderWithVideo
         {
             return null != str && str.All(c => c.Equals(' '));
         }
-
         private static void CreateSubtitleFromData(List<string> data)
         {
             TimeSpan start = new TimeSpan(0, 0, 0);
@@ -109,7 +109,6 @@ namespace StReaderWithVideo
         private static bool IsItalicText(string text)
         {
             return text.Contains("<i>");
-
         }
     }
 }

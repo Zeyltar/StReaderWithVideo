@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <MediaElement x:Name="Video" Stretch="Fill"></MediaElement>
+        <MediaElement x:Name="Video" LoadedBehavior="Manual" Stretch="Fill" MouseLeftButtonUp="OnMouseLeftButtonUp"></MediaElement>
         <TextBlock x:Name="St" TextAlignment="Center" Text="Subtitle" VerticalAlignment="Bottom" Margin="0,0,0,25" Background="#7F000000" Foreground="#BFFFFFFF" HorizontalAlignment="Center" Padding="5,0,4,0" FontSize="16"/>
     </Grid>
 

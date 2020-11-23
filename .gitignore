@@ -7,3 +7,6 @@
 x64/
 [Bb]in/
 [Oo]bj/
+
+*.srt
+*.mkv
