@@ -1,6 +1,6 @@
 # StReaderWithVideo
 
-### Si vous voulez la version qui a été présentée lors de la démonstration, allez sur la branche demo [ici](https://github.com/Zeyltar/StReaderWithVideo/tree/demo).
+> Si vous voulez la version qui a été présentée lors de la démonstration, allez sur la branche demo [ici](https://github.com/Zeyltar/StReaderWithVideo/tree/demo).
 
 ## Fonctionnalités:
 - [x] Affichage vidéo.
